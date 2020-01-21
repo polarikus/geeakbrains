@@ -1,15 +1,19 @@
 <?php
+/* Тут я проверял будет ли работать с intdiv()
+$a = 16;
+if($a/3==intdiv($a,3)) {
+    echo "Да";
+} else {
+    echo "Нет";
+}
+*/
+$i = 1;
+while ($i <=100) {
+    if($i/3==intdiv($i,3)){
+        echo $i.'<br>';
+    }
+    
+    $i ++;
+}
 
-    $a = 2;
-    $b = 2;
-    $result = 0;
-    echo " a=$a b=$b";
-    if($a >= 0 && $b >= 0){
-        $result = $a - $b;
-        } if($a < 0 &&  $b < 0) {
-            $result = $a * $b;
-            } else {
-                    $result = $a + $b;
-                }
-    echo "<br>$result";
 ?>
