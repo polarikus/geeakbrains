@@ -1,2 +1,0 @@
-# geeakbrains
-Для Дз наГБ
