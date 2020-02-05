@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Янв 29 2020 г., 20:00
+-- Время создания: Фев 06 2020 г., 00:17
 -- Версия сервера: 10.3.13-MariaDB-log
 -- Версия PHP: 7.1.32
 
@@ -19,53 +19,47 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- База данных: `photo_galery`
+-- База данных: `otziv`
 --
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `photo`
+-- Структура таблицы `users`
 --
 
-CREATE TABLE `photo` (
-  `id` int(11) NOT NULL,
-  `name` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `url` varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `size` int(11) NOT NULL,
-  `count` int(11) NOT NULL
+CREATE TABLE `users` (
+  `idusers` int(11) NOT NULL,
+  `login` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `pass` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Дамп данных таблицы `photo`
+-- Дамп данных таблицы `users`
 --
 
-INSERT INTO `photo` (`id`, `name`, `url`, `size`, `count`) VALUES
-(6, '0Z4679jxFzk.jpg', 'images/0Z4679jxFzk.jpg', 281260, 18),
-(7, 'product-1.png', 'images/product-1.png', 28174, 4),
-(8, 'nogti3.jpg', 'images/nogti3.jpg', 43733, 6),
-(9, 'nogti2.jpg', 'images/nogti2.jpg', 107958, 2),
-(10, 'khjgk.jpg', 'images/khjgk.jpg', 227361, 1);
+INSERT INTO `users` (`idusers`, `login`, `pass`) VALUES
+(1, 'mitrandir', 'Danilov8806');
 
 --
 -- Индексы сохранённых таблиц
 --
 
 --
--- Индексы таблицы `photo`
+-- Индексы таблицы `users`
 --
-ALTER TABLE `photo`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`idusers`,`login`);
 
 --
 -- AUTO_INCREMENT для сохранённых таблиц
 --
 
 --
--- AUTO_INCREMENT для таблицы `photo`
+-- AUTO_INCREMENT для таблицы `users`
 --
-ALTER TABLE `photo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+ALTER TABLE `users`
+  MODIFY `idusers` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
