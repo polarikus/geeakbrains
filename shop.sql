@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Фев 02 2020 г., 17:51
+-- Время создания: Фев 09 2020 г., 16:57
 -- Версия сервера: 10.3.13-MariaDB-log
 -- Версия PHP: 7.1.32
 
@@ -19,8 +19,21 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- База данных: `otziv`
+-- База данных: `shop`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `cart`
+--
+
+CREATE TABLE `cart` (
+  `id` int(11) NOT NULL,
+  `byer_id` int(45) NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `count` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -29,8 +42,8 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `images` (
-  `id` int(11) NOT NULL,
-  `name` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `idimg` int(11) NOT NULL,
+  `nameimg` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
   `path` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -38,13 +51,13 @@ CREATE TABLE `images` (
 -- Дамп данных таблицы `images`
 --
 
-INSERT INTO `images` (`id`, `name`, `path`) VALUES
-(1, 'icon1.png', 'images/orders/mane'),
-(2, 'about1.jpg', 'images/orders/inside'),
-(3, 'icon2.png', 'images/orders/mane'),
-(4, 'about2.jpg', 'images/orders/inside'),
-(5, 'icon3.png', 'images/orders/mane'),
-(6, 'about3.jpg', 'images/orders/inside');
+INSERT INTO `images` (`idimg`, `nameimg`, `path`) VALUES
+(7, 'about1.jpg', 'images/orders/inside'),
+(8, 'about2.jpg', 'images/orders/inside'),
+(9, 'about3.jpg', 'images/orders/inside'),
+(11, 'icon1.png', 'images/orders/mane'),
+(12, 'icon2.png', 'images/orders/mane'),
+(13, 'icon3.png', 'images/orders/mane');
 
 -- --------------------------------------------------------
 
@@ -59,17 +72,18 @@ CREATE TABLE `orders` (
   `image_inside` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
   `article` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
   `about` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `order` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL
+  `order` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `count` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Дамп данных таблицы `orders`
 --
 
-INSERT INTO `orders` (`id`, `name`, `image_mane`, `image_inside`, `article`, `about`, `order`) VALUES
-(1, 'Посох', '1', '2', '1456', 'Это посох с отличными харрактиристиками', 'Polarikus'),
-(2, 'Серебрянная накидка', '3', '4', '3634', 'Отлличный для 40+ ЛВЛ', 'Mitrandir'),
-(3, 'Посох из огненного дерева', '5', '6', '364574', 'Шикарные статы', 'Olorin');
+INSERT INTO `orders` (`id`, `name`, `image_mane`, `image_inside`, `article`, `about`, `order`, `count`) VALUES
+(6, 'Посох', '11', '7', '141234', 'Это посох', 'Галадрим', '1'),
+(7, 'Плащец', '12', '8', '1241234', 'Это плащец', 'Митрандир', '2'),
+(8, 'Руна', '13', '9', '3466', 'Это руна', 'Щит', '2');
 
 -- --------------------------------------------------------
 
@@ -84,27 +98,43 @@ CREATE TABLE `otziv` (
   `date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- --------------------------------------------------------
+
 --
--- Дамп данных таблицы `otziv`
+-- Структура таблицы `users`
 --
 
-INSERT INTO `otziv` (`id`, `name`, `content`, `date`) VALUES
-(1, 'Наруто', 'Ё собаки, я наруто узумаки.', '2020-01-31 05:47:00'),
-(5, 'anonim', 'Хороший магазин, базарю', '2020-01-31 06:08:00'),
-(6, 'Тест', 'Тестовый отзыв', '2020-02-01 02:02:00'),
-(7, 'Вася', 'Полный отстой ваши эти все', '2020-02-02 03:31:00'),
-(8, 'Тест тег', 'Тест тег', '2020-02-02 05:26:00'),
-(9, 'Тест капт', 'Капчи тест', '2020-02-02 05:49:00');
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `login` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `niks` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `admin` tinyint(1) NOT NULL,
+  `pass` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Дамп данных таблицы `users`
+--
+
+INSERT INTO `users` (`id`, `login`, `name`, `niks`, `admin`, `pass`) VALUES
+(2, 'admin', 'Игорь', '', 1, 'dbd35d4d522a562bd4ac9dbb7a57e28aAB4F63F9AC65152575886860DDE480A1');
 
 --
 -- Индексы сохранённых таблиц
 --
 
 --
+-- Индексы таблицы `cart`
+--
+ALTER TABLE `cart`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Индексы таблицы `images`
 --
 ALTER TABLE `images`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`idimg`);
 
 --
 -- Индексы таблицы `orders`
@@ -119,26 +149,44 @@ ALTER TABLE `otziv`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Индексы таблицы `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`,`login`);
+
+--
 -- AUTO_INCREMENT для сохранённых таблиц
 --
+
+--
+-- AUTO_INCREMENT для таблицы `cart`
+--
+ALTER TABLE `cart`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT для таблицы `images`
 --
 ALTER TABLE `images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `idimg` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT для таблицы `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT для таблицы `otziv`
 --
 ALTER TABLE `otziv`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT для таблицы `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
